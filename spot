@@ -31,7 +31,7 @@ MENULIST=(
 22 " Configure mail account for Propagation Monitor" \
 23 " Configure Dwagent" \
 24 " Start / stop RRFRaptor" \
-25 " Start / stop Numeric mode" \
+25 " Enable / disable Numeric mode" \
 26 " Reboot '1000'"
 )
 
@@ -133,7 +133,11 @@ do
     if [ "${STATUS}" = "active" ]; then
         echo "Stop $SERVICE.service"
         systemctl stop $SERVICE.service
+        echo "Disable $SERVICE.service"
+        systemctl disable $SERVICE.service
     else
+        echo "Enable $SERVICE.service"
+        systemctl enable $SERVICE.service
         echo "Start $SERVICE.service"
         systemctl start $SERVICE.service
     fi

@@ -22,6 +22,10 @@ Ces 2 options pointent tout simplement vers `/etc/spotnik/num.sh enable` et `/et
 
 > Attention, j'insiste à nouveau sur les options _enable_ et _disable_ du script `num.sh`. Elles influencent le comportement du chargement et du démarrage des services numériques __lors du prochain reboot__. Elles n'influencent en rien l'état actuel des services numériques (qui peuvent être _active_ ou _inactive_). L'utilisation de ces options _enable_ et _disable_ nécessite donc un reboot pour prendre effet. 
 
+# Todo
+
+Patcher les scripts analogiques (genre `restart.rrf`, etc.) afin de lancer `/etc/spotnik/num.sh stop` (pour stopper les services numériques). Et inversement, patcher le script `restart.num` afin de lancer `/etc/spotnik/num.sh start`.  
+
 73 de F4HWN Armel
 
 

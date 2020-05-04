@@ -18,7 +18,7 @@ do
             systemctl stop $SERVICE.service
             ;;
         status)
-            echo "Status $SERVICE.service"
+            echo -n "Status of $SERVICE.service : "
             systemctl is-active $SERVICE.service
             ;;
         esac

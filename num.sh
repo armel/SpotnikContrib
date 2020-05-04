@@ -30,7 +30,16 @@ do
             systemctl disable $SERVICE.service
             ;;
         version)
-            echo "Version 0.1"
+            echo "Version 0.1 - F4HWN Armel"
             exit
         esac
 done
+
+case "$1" in 
+    enable)
+        echo "You need to reboot !"
+        ;;
+    disable)
+        echo "You need to reboot !"
+        ;;
+    esac

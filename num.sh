@@ -22,11 +22,11 @@ do
             systemctl is-active $SERVICE.service
             ;;
         enable)
-            echo "Enable $SERVICE.service : "
+            echo -n "Enable $SERVICE.service : "
             systemctl enable $SERVICE.service
             ;;
         disable)
-            echo "Disable $SERVICE.service : "
+            echo -n "Disable $SERVICE.service : "
             systemctl disable $SERVICE.service
             ;;
         version)

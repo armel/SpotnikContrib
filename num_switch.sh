@@ -4,7 +4,7 @@
 # Enable or Disable Num Services by F4HWN Armel
 #
 
-SERVICES=("ambeserver" "analog_bridge" "hblink3" "hbmonitor" "ircddbgateway" "md380-emu" "mmdvm_bridge" "nxdngateway" "p25gateway" "ysfgateway")
+SERVICES=("ambeserver" "analog_bridge" "ircddbgateway" "md380-emu" "mmdvm_bridge" "nxdngateway" "p25gateway" "ysfgateway")
 for SERVICE in "${SERVICES[@]}"
 do
     STATUS="$(systemctl is-active $SERVICE.service)"

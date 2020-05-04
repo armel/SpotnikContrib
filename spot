@@ -31,7 +31,7 @@ MENULIST=(
 22 " Configure mail account for Propagation Monitor" \
 23 " Configure Dwagent" \
 24 " Start / stop RRFRaptor" \
-25 " Stop / start Numeric mode" \
+25 " Start / stop Numeric mode" \
 26 " Reboot '1000'"
 )
 

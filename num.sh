@@ -30,7 +30,7 @@ do
             systemctl disable $SERVICE.service
             ;;
         version)
-            echo "Version 0.1 - F4HWN Armel"
+            echo "num.sh version 0.1 - F4HWN Armel"
             exit
         esac
 done

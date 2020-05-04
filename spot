@@ -25,17 +25,15 @@ MENULIST=(
 16 " Edit Svxlink.cfg for all reflectors" \
 17 " Edit Svxlink.el for EchoLink." \
 18 " Edit ModuleEchoLink.conf" \
-19 " Edit Airport for meteo" \
-20 " Edit Logic.tcl (Dangerous)" \
-21 " MC Midnight Commander" \
-22 " Configure mail account for Propagation Monitor" \
-23 " Configure Dwagent" \
-24 " Start / stop RRFRaptor" \
-25 " Enable / disable Numeric mode" \
-26 " Reboot '1000'"
+19 " Edit Logic.tcl (Dangerous)" \
+20 " MC Midnight Commander" \
+21 " Configure Dwagent " \
+22 " Start / stop RRFRaptor !" \
+23 " Enable Numeric mode" \
+24 " Disable Numeric mode"
 )
-
-choix=$(whiptail --title "- Spotnik 4.0 Menu -"  --menu "                    >> Make your Choice: " 35 69 28 \
+# nbre de ligne / colonne / ascenseur ?
+choix=$(whiptail --title "- Spotnik 4.0 Menu -"  --menu "                  >> Make your Choice: " 35 60 25 \
 "${MENULIST[@]}" \
 3>&1 1>&2 2>&3)
 
@@ -75,7 +73,7 @@ case $choix in
 /etc/spotnik/restart.loc ;;
 
 8)
-/etc/spotnik/restart.sat ;;
+/etc/spotnik/restart.exp ;;
 
 9)
 /etc/spotnik/restart.el ;;
@@ -108,45 +106,23 @@ mcedit /etc/spotnik/svxlink.el ;;
 mcedit /etc/spotnik/svxlink.d/ModuleEchoLink.conf ;;
 
 19)
-mcedit /etc/spotnik/svxlink.d/ModuleMetarInfo.conf ;;
-
-20)
 mcedit /usr/share/svxlink/events.d/local/Logic.tcl ;;
 
-21)
+20)
 mc /etc/spotnik ;;
 
-22)
-fetchsetup ;;
-
-23)
+21)
 sh /usr/share/dwagent/native/configure ;;
 
-24)
+22)
 sh /opt/RRFRaptor/RRFRaptor.sh ;;
 
-25)
-SERVICES=("ambeserver" "analog_bridge" "ircddbgateway" "md380-emu" "mmdvm_bridge" "nxdngateway" "p25gateway" "ysfgateway")
-for SERVICE in "${SERVICES[@]}"
-do
-    STATUS="$(systemctl is-active $SERVICE.service)"
-    if [ "${STATUS}" = "active" ]; then
-        echo "Stop $SERVICE.service"
-        systemctl stop $SERVICE.service
-        echo "Disable $SERVICE.service"
-        systemctl disable $SERVICE.service
-    else
-        echo "Enable $SERVICE.service"
-        systemctl enable $SERVICE.service
-        echo "Start $SERVICE.service"
-        systemctl start $SERVICE.service
-    fi
-done
-;;
-26)
-reboot
+23)
+sh ./num.sh enable ;;
+
+24)
+sh ./num.sh disable
 
 esac
-
 done
 exit 0

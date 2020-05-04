@@ -17,7 +17,7 @@ do
             echo "Stop $SERVICE.service"
             systemctl stop $SERVICE.service
             ;;
-        status)
+        state)
             echo -n "State of $SERVICE.service : "
             systemctl is-active $SERVICE.service
             ;;

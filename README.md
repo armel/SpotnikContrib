@@ -20,7 +20,9 @@ En partant du script `spot` patché, j'ai ajouté 2 nouvelles options. C'est bea
 
 Ces 2 options pointent tout simplement vers `/etc/spotnik/num.sh enable` et `/etc/spotnik/num.sh disable`. 
 
-> Attention, j'insiste à nouveau sur les options _enable_ et _disable_ du script `num.sh`. Elles influencent le comportement du chargement et du démarrage des services numériques __lors du prochain reboot__. Elles n'influencent en rien l'état actuel des services numériques (qui peuvent être _active_ ou _inactive_). L'utilisation de ces options _enable_ et _disable_ nécessite donc un reboot. 
+> Attention, j'insiste à nouveau sur les options _enable_ et _disable_ du script `num.sh`. Elles influencent le comportement du chargement et du démarrage des services numériques __lors du prochain reboot__. Elles n'influencent en rien l'état actuel des services numériques (qui peuvent être _active_ ou _inactive_). L'utilisation de ces options _enable_ et _disable_ nécessite donc un reboot pour prendre effet. 
+
+73 de F4HWN Armel
 
 
 

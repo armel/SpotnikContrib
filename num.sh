@@ -2,7 +2,7 @@
 
 # This script start or stop numeric services
 # F4HWN Armel
-# Usage : num.sh [stop|start|state]
+# Usage : num.sh [stop|start|state|enable|disable|version]
 
 
 SERVICES=("ambeserver" "analog_bridge" "ircddbgateway" "md380-emu" "mmdvm_bridge" "nxdngateway" "p25gateway" "ysfgateway")
@@ -21,5 +21,15 @@ do
             echo -n "State of $SERVICE.service : "
             systemctl is-active $SERVICE.service
             ;;
+        enable)
+            echo "Enable $SERVICE.service : "
+            systemctl enable $SERVICE.service
+            ;;
+        disable)
+            echo "Disable $SERVICE.service : "
+            systemctl disable $SERVICE.service
+            ;;
+        version)
+            echo "Version 0.1"    
         esac
 done

@@ -26,7 +26,7 @@ do
             systemctl enable $SERVICE.service
             ;;
         disable)
-            echo -n "Disable $SERVICE.service : "
+            echo "Disable $SERVICE.service"
             systemctl disable $SERVICE.service
             ;;
         version)

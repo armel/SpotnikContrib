@@ -7,7 +7,6 @@
 SERVICES=("ambeserver" "analog_bridge" "hblink3" "hbmonitor" "ircddbgateway" "md380-emu" "mmdvm_bridge" "nxdngateway" "p25gateway" "ysfgateway")
 for SERVICE in "${SERVICES[@]}"
 do
-    echo "$SERVICE.service"
     STATUS="$(systemctl is-active $SERVICE.service)"
     if [ "${STATUS}" = "active" ]; then
         echo "Stop $SERVICE.service"

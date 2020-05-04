@@ -2,8 +2,8 @@
 
 # This script start or stop numeric services
 # F4HWN Armel
-# Usage : num.sh [stop|start|state|enable|disable|version]
-
+# Usage : num.sh [stop|start|state|enable|disable]
+# Version 0.1
 
 SERVICES=("ambeserver" "analog_bridge" "ircddbgateway" "md380-emu" "mmdvm_bridge" "nxdngateway" "p25gateway" "ysfgateway")
 for SERVICE in "${SERVICES[@]}"
@@ -30,6 +30,7 @@ do
             systemctl disable $SERVICE.service
             ;;
         version)
-            echo "Version 0.1"    
+            echo "Version 0.1"
+            exit
         esac
 done

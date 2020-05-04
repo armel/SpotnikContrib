@@ -118,10 +118,10 @@ sh /usr/share/dwagent/native/configure ;;
 sh /opt/RRFRaptor/RRFRaptor.sh ;;
 
 23)
-./num.sh enable ;;
+/etc/spotnik/num.sh enable ;;
 
 24)
-./num.sh disable
+/etc/spotnik/num.sh disable
 
 esac
 done

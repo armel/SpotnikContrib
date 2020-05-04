@@ -1,0 +1,149 @@
+#!/bin/bash
+# MENU DE SELECTION POUR Spotnik-4.0
+#
+#  F5NLG  27/04/2020
+#
+
+while : ; do
+
+MENULIST=(
+1 " Restart Spotnik on Stand Alone '95'" \
+2 " Restart Spotnik on RRF '96'" \
+3 " Restart Spotnik on FON Room '97'" \
+4 " Restart Spotnik on TEC Room '98'" \
+5 " Restart Spotnik on INT Room '99'" \
+6 " Restart Spotnik on BAV Room '100'" \
+7 " Restart Spotnik on LOC Room '101'" \
+8 " Restart Spotnik on EXP Room '102'" \
+9 " Restart Spotnik on EchoLink '103'" \
+10 " Restart Spotnik on REG Room '104'" \
+11 " Restart Spotnik on Xwindow Digital '105'" \
+12 " Restart Spotnik on C4FM/P25/NXDN/DMR '106'" \
+13 " See Spotnik working (Logs) 'ctrl c'to leave" \
+14 " Configure Wifi or network" \
+15 " Trim Sound Alsamixer" \
+16 " Edit Svxlink.cfg for all reflectors" \
+17 " Edit Svxlink.el for EchoLink." \
+18 " Edit ModuleEchoLink.conf" \
+19 " Edit Airport for meteo" \
+20 " Edit Logic.tcl (Dangerous)" \
+21 " MC Midnight Commander" \
+22 " Configure mail account for Propagation Monitor" \
+23 " Configure Dwagent" \
+24 " Start / stop RRFRaptor" \
+25 " Stop / start Numeric mode" \
+26 " Reboot '1000'"
+)
+
+choix=$(whiptail --title "- Spotnik 4.0 Menu -"  --menu "                    >> Make your Choice: " 35 69 28 \
+"${MENULIST[@]}" \
+3>&1 1>&2 2>&3)
+
+exitstatus=$?
+
+#on recupere ce choix
+#exitstatus=$?
+if [ $exitstatus = 0 ]; then
+    echo "Your chosen option:" $choix
+else
+    echo "You chose Cancel."; break;
+fi
+
+# case : action en fonction du choix
+
+case $choix in
+
+1)
+/etc/spotnik/restart.default ;;
+
+2)
+/etc/spotnik/restart.rrf ;;
+
+3)
+/etc/spotnik/restart.fon ;;
+
+4)
+/etc/spotnik/restart.tec ;;
+
+5)
+/etc/spotnik/restart.int ;;
+
+6)
+/etc/spotnik/restart.bav ;;
+
+7)
+/etc/spotnik/restart.loc ;;
+
+8)
+/etc/spotnik/restart.sat ;;
+
+9)
+/etc/spotnik/restart.el ;;
+
+10)
+/etc/spotnik/restart.reg ;;
+
+11)
+/etc/spotnik/restart.fdv ;;
+
+12)
+/etc/spotnik/restart.num ;;
+
+13)
+/etc/spotnik/view_svx ;;
+
+14)
+nmtui ;;
+
+15)
+alsamixer && alsactl store ;;
+
+16)
+mcedit /etc/spotnik/svxlink.cfg ;;
+
+17)
+mcedit /etc/spotnik/svxlink.el ;;
+
+18)
+mcedit /etc/spotnik/svxlink.d/ModuleEchoLink.conf ;;
+
+19)
+mcedit /etc/spotnik/svxlink.d/ModuleMetarInfo.conf ;;
+
+20)
+mcedit /usr/share/svxlink/events.d/local/Logic.tcl ;;
+
+21)
+mc /etc/spotnik ;;
+
+22)
+fetchsetup ;;
+
+23)
+sh /usr/share/dwagent/native/configure ;;
+
+24)
+sh /opt/RRFRaptor/RRFRaptor.sh ;;
+
+25)
+SERVICES=("ambeserver" "analog_bridge" "hblink3" "hbmonitor" "ircddbgateway" "md380-emu" "mmdvm_bridge" "nxdngateway" "p25gateway" "ysfgateway")
+for SERVICE in "${SERVICES[@]}"
+do
+    echo "$SERVICE.service"
+    STATUS="$(systemctl is-active $SERVICE.service)"
+    if [ "${STATUS}" = "active" ]; then
+        echo "Stop $SERVICE.service"
+        systemctl stop $SERVICE.service
+    else
+        echo "Start $SERVICE.service"
+        systemctl start $SERVICE.service
+    fi
+done
+
+26)
+reboot
+
+esac
+
+done
+exit 0

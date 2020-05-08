@@ -19,7 +19,7 @@ import serial
 
 #################################
 # USRP configuration Variables
-ipAddress = "127.0.0.1"
+ipAddress = '127.0.0.1'
 
 # put number of txPort = 46001 from Ananlog_Bridge.ini
 # usrpPortRX = txPort
@@ -53,13 +53,13 @@ class ReadLine:
     def readline(self):
         while True:
             data = self.s.read(1)
-            i = data.find(b"T")
+            i = data.find(b'T')
             if i >= 0:
-                r = "True"
+                r = 'True'
                 return r
-            i = data.find(b"R")
+            i = data.find(b'R')
             if i >= 0:
-                r = "False"
+                r = 'False'
                 return r
 
 # USRP send stream audio from DMR Analog_Bridge to  SVXLink via ALSA Loop hw:loopback,1,0
@@ -82,7 +82,7 @@ def rxAudioStream():
                     )
     udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     udp.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
-    udp.bind(("", usrpPortRX))
+    udp.bind(('', usrpPortRX))
     lastsql = 0
 
     while True:
@@ -90,7 +90,7 @@ def rxAudioStream():
         if addr[0] != ipAddress:
             ipAddress = addr[0]
         if (soundData[0:4] == 'USRP'):
-            keyup, = struct.unpack(">i", soundData[12:16])
+            keyup, = struct.unpack('>i', soundData[12:16])
             if keyup == 0:
                 # SQL Close
                 ser.write(str.encode('Z'))
@@ -99,7 +99,7 @@ def rxAudioStream():
                 # SQL Open
                 ser.write(str.encode('O'))
                 lastsql = 1
-            type, = struct.unpack("i", soundData[20:24])
+            type, = struct.unpack('i', soundData[20:24])
             audio = soundData[32:]
             if (type == 0): # voice
                 audio = soundData[32:]
@@ -138,7 +138,6 @@ def txAudioStream():
     seq = 0
     while True:
         try:
-
             if RATE == 48000:       # If we are reading at 48K we need to resample to 8K
                 audio48 = stream.read(CHUNK, exception_on_overflow=False)
                 (audio, state) = audioop.ratecv(audio48, 2, 1, 48000, 8000, state)
@@ -156,7 +155,7 @@ def txAudioStream():
                 #print 'transmitting'
                 seq = seq + 1
         except:
-            print("overflow")
+            print('overflow')
 
 ptt = False 
 
@@ -169,6 +168,6 @@ _thread.start_new_thread( txAudioStream, () )
 device = ReadLine(s)
 while True:
     p = device.readline()
-    if p == "True" or p == "False":
+    if p == 'True' or p == 'False':
         ptt = not ptt
 

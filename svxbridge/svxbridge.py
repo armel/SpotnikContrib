@@ -93,12 +93,12 @@ def rxAudioStream():
             keyup, = struct.unpack(">i", soundData[12:16])
             if keyup == 0:
                # SQL Close
-               ser.write("Z")
-               lastsql = 0
+                ser.write(str.encode('Z'))
+                lastsql = 0
             if keyup == 1 and lastsql != keyup:
-               # SQL Open
-               ser.write("O")
-               lastsql = 1
+                # SQL Open
+                ser.write(str.encode('O'))
+                lastsql = 1
             type, = struct.unpack("i", soundData[20:24])
             audio = soundData[32:]
             if (type == 0): # voice
@@ -110,11 +110,11 @@ def rxAudioStream():
                     else:
                         stream.write(audio, 160)
         else:
-           # SQL Close
-           ser.write("Z")
+            # SQL Close
+            ser.write(str.encode('Z'))
     udp.close()
     # SQL Close
-    ser.write("Z")
+    ser.write(str.encode('Z'))
 
 
 # USRP send stream audio from SVXLink via ALSA Loop hw:loopback,1,2 to Analog_Bridge 

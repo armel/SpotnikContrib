@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 import pyaudio
 p = pyaudio.PyAudio()
 for i in range(p.get_device_count()):

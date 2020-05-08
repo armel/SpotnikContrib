@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 #    
 #  SP2ONG 2019
 #  F4HWN 2020 (port from Python 2 to Python 3)

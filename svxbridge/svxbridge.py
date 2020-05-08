@@ -55,12 +55,12 @@ class ReadLine:
             data = self.s.read(1)
             i = data.find(b"T")
             if i >= 0:
-               r = "True"
-               return r
+                r = "True"
+                return r
             i = data.find(b"R")
             if i >= 0:
-               r = "False"
-               return r
+                r = "False"
+                return r
 
 # USRP send stream audio from DMR Analog_Bridge to  SVXLink via ALSA Loop hw:loopback,1,0
 
@@ -92,7 +92,7 @@ def rxAudioStream():
         if (soundData[0:4] == 'USRP'):
             keyup, = struct.unpack(">i", soundData[12:16])
             if keyup == 0:
-               # SQL Close
+                # SQL Close
                 ser.write(str.encode('Z'))
                 lastsql = 0
             if keyup == 1 and lastsql != keyup:
@@ -158,8 +158,6 @@ def txAudioStream():
         except:
             print("overflow")
 
-
-
 ptt = False 
 
 p = pyaudio.PyAudio()
@@ -167,11 +165,10 @@ p = pyaudio.PyAudio()
 _thread.start_new_thread( rxAudioStream, () )
 _thread.start_new_thread( txAudioStream, () )
 
-
 #Loop for read status of PTT from /tmp/PTT
 device = ReadLine(s)
 while True:
     p = device.readline()
     if p == "True" or p == "False":
-      ptt = not ptt
+        ptt = not ptt
 

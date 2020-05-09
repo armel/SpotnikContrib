@@ -167,7 +167,7 @@ _thread.start_new_thread( txAudioStream, () )
 #Loop for read status of PTT from /tmp/PTT
 device = ReadLine(s)
 while True:
-    p = device.readline()
+    p = (device.readline())
     if p == 'True' or p == 'False':
         ptt = not ptt
 

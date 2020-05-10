@@ -81,5 +81,5 @@ done
 
 # Return to RRF
 
-echo 'Return to RRF at `date +'%d-%m-%Y %H:%M:%S' -d @$now` ($now)' > $log
+echo "Return to RRF at `date +'%d-%m-%Y %H:%M:%S' -d @$now` ($now)" >> $log
 /etc/spotnik/restart.rrf

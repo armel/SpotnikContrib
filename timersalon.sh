@@ -17,7 +17,7 @@ talker_stop=`date +%s`
 
 # Remove last log
 
-rm /tmp/timersalon.log
+rm /var/log/timersalon.log
 
 # Main loop
 

@@ -6,9 +6,11 @@ Enfin, la durée du timeout peut-être passée en argument du script. Cette poss
 
 Par exemple, en fin de script `restart.tec`, il suffit de mettre :
 
-`sh /etc/spotnik/timersalon.sh 240 &`au lieu de,
+`sh /etc/spotnik/timersalon.sh 240 &`
 
-`sh /etc/spotnik/timersalon.sh &`
+au lieu de,
+
+`sh /etc/spotnik/timersalon.sh &`
 
 Pour finir, un fichier de log est écrit dans `/var/log/timersalon.log`. Il sert uniquement à des fins de débuggage. Le choix d'écrire dans `/var/log` permet d'éviter des écritures sur la carte SD (`/var/log` étant monté en mémoire). 
 

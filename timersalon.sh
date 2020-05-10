@@ -79,7 +79,7 @@ Timer               : $timer seconds
 --------------------
 EOF
     else
-        rm $log
+        echo "QSO active at `date +'%d-%m-%Y %H:%M:%S' -d @$now` ($now)" > $log
     fi
 done
 

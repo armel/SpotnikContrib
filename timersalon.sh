@@ -60,7 +60,7 @@ while [ $timer -lt $timeout ]; do
 
     # Write trace for debug
 
-    if [ "$trace" = true]
+    if [ "$trace" = true ]
     then
 
 cat << EOF >> /tmp/timersalon.log

@@ -57,13 +57,12 @@ while [ $timer -lt $timeout ]; do
 
     # Write trace for debug
 
-    cat << EOF > /tmp/timersalon.log
-    Last Talker Start\t: `date +'%d-%m-%Y %H:%M:%S' -d @$talker_start` ($talker_start)
-    Last Talker Stop\t: `date +'%d-%m-%Y %H:%M:%S' -d @$talker_stop` ($talker_stop)
-    Last Radio Activity\t: `date +'%d-%m-%Y %H:%M:%S' -d @$last` ($last)
-    Timer : $timer seconds
-    ----------
-    EOF
+cat << EOF > /tmp/timersalon.log
+Last Talker Start\t: `date +'%d-%m-%Y %H:%M:%S' -d @$talker_start` ($talker_start)
+Last Talker Stop\t: `date +'%d-%m-%Y %H:%M:%S' -d @$talker_stop` ($talker_stop)
+Last Radio Activity\t: `date +'%d-%m-%Y %H:%M:%S' -d @$last` ($last)
+Timer : $timer seconds
+EOF
 
     # And standby...
 

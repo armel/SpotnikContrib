@@ -28,6 +28,8 @@ rm $log
 # Main loop
 
 while [ $timer -lt $timeout ]; do
+    # Standby
+    sleep 10
 
     # Catch last Talker start (if exist)
 
@@ -72,16 +74,13 @@ cat << EOF >> $log
 Last Talker Start   : `date +'%d-%m-%Y %H:%M:%S' -d @$talker_start` ($talker_start)
 Last Talker Stop    : `date +'%d-%m-%Y %H:%M:%S' -d @$talker_stop` ($talker_stop)
 Last Radio Activity : `date +'%d-%m-%Y %H:%M:%S' -d @$last` ($last)
+Timout              : $timeout seconds
 Timer               : $timer seconds
 --------------------
 EOF
     else
         rm $log
     fi
-
-    # And standby...
-
-    sleep 10
 done
 
 # Return to RRF

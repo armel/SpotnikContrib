@@ -57,9 +57,9 @@ while [ $timer -lt $timeout ]; do
 
     # Write trace for debug
 
-    echo "Last Talker Start\t: `date -d @$talker_start` ($talker_start)" >> /tmp/timersalon.log
-    echo "Last Talker Stop\t: `date -d @$talker_stop` ($talker_stop)" >> /tmp/timersalon.log
-    echo "Last Radio Activity\t: `date -d @$last` ($last)" >> /tmp/timersalon.log
+    echo "Last Talker Start\t: `date +'%d-%m-%Y %H:%M:%S' -d @$talker_start` ($talker_start)" >> /tmp/timersalon.log
+    echo "Last Talker Stop\t: `date +'%d-%m-%Y %H:%M:%S' -d @$talker_stop` ($talker_stop)" >> /tmp/timersalon.log
+    echo "Last Radio Activity\t: `date +'%d-%m-%Y %H:%M:%S' -d @$last` ($last)" >> /tmp/timersalon.log
     echo "Timer : $timer seconds" >> /tmp/timersalon.log
     echo "----------" >> /tmp/timersalon.log
 

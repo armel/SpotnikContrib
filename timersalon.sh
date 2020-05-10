@@ -6,7 +6,12 @@
 
 # Set timeout in seconds
 
-timeout=60
+if [ $# -eq 0 ]
+then
+    timeout=300
+else
+    timeout=$1
+fi
 
 # Init other values (don't touch)
 

@@ -21,9 +21,12 @@ talker_start=0
 talker_stop=`date +%s`
 log='/var/log/timersalon.log' 
 
-# Remove last log
+# Start log
 
-rm $log
+cat << EOF > $log
+Start QSY at        : `date +'%d-%m-%Y %H:%M:%S' -d @$last` ($last)
+--------------------
+EOF
 
 # Main loop
 
@@ -79,7 +82,12 @@ Timer               : $timer seconds
 --------------------
 EOF
     else
-        echo "QSO active at `date +'%d-%m-%Y %H:%M:%S' -d @$now` ($now)" > $log
+
+cat << EOF > $log
+Last QSO active at  : `date +'%d-%m-%Y %H:%M:%S' -d @$now` ($now)
+--------------------
+EOF
+
     fi
 done
 

@@ -14,10 +14,11 @@ last=`date +%s`
 timer=0
 talker_start=0
 talker_stop=`date +%s`
+log='/var/log/timersalon.log' 
 
 # Remove last log
 
-rm /var/log/timersalon.log
+rm $log
 
 # Main loop
 
@@ -62,7 +63,7 @@ while [ $timer -lt $timeout ]; do
     if [ "$trace" = true ]
     then
 
-cat << EOF >> /var/log/timersalon.log
+cat << EOF >> $log
 Last Talker Start   : `date +'%d-%m-%Y %H:%M:%S' -d @$talker_start` ($talker_start)
 Last Talker Stop    : `date +'%d-%m-%Y %H:%M:%S' -d @$talker_stop` ($talker_stop)
 Last Radio Activity : `date +'%d-%m-%Y %H:%M:%S' -d @$last` ($last)
@@ -70,7 +71,7 @@ Timer               : $timer seconds
 --------------------
 EOF
     else
-        rm /var/log/timersalon.log
+        rm $log
     fi
 
     # And standby...
@@ -80,5 +81,5 @@ done
 
 # Return to RRF
 
-echo 'Return to RRF at `date +'%d-%m-%Y %H:%M:%S' -d @$now` ($now)' > /var/log/timersalon.log
+echo 'Return to RRF at `date +'%d-%m-%Y %H:%M:%S' -d @$now` ($now)' > $log
 /etc/spotnik/restart.rrf

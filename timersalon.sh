@@ -62,7 +62,7 @@ while [ $timer -lt $timeout ]; do
     if [ "$trace" = true ]
     then
 
-cat << EOF >> /tmp/timersalon.log
+cat << EOF >> /var/log/timersalon.log
 Last Talker Start   : `date +'%d-%m-%Y %H:%M:%S' -d @$talker_start` ($talker_start)
 Last Talker Stop    : `date +'%d-%m-%Y %H:%M:%S' -d @$talker_stop` ($talker_stop)
 Last Radio Activity : `date +'%d-%m-%Y %H:%M:%S' -d @$last` ($last)
@@ -70,7 +70,7 @@ Timer               : $timer seconds
 --------------------
 EOF
     else
-        rm /tmp/timersalon.log
+        rm /var/log/timersalon.log
     fi
 
     # And standby...

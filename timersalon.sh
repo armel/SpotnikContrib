@@ -6,7 +6,7 @@
 
 # Set timeout in seconds
 
-timeout=120
+timeout=60
 
 # Init other values (don't touch)
 

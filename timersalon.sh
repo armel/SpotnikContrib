@@ -47,8 +47,11 @@ while [ $timer -lt $timeout ]; do
     if [ $talker_start -gt $talker_stop ]
     then
         last=`date +%s`
+        trace=false
+        rm /tmp/timersalon.log
     else
         last=$talker_stop
+        trace=true
     fi
 
     now=`date +%s`
@@ -57,6 +60,9 @@ while [ $timer -lt $timeout ]; do
 
     # Write trace for debug
 
+    if [ "$trace" = true]
+    then
+
 cat << EOF >> /tmp/timersalon.log
 Last Talker Start   : `date +'%d-%m-%Y %H:%M:%S' -d @$talker_start` ($talker_start)
 Last Talker Stop    : `date +'%d-%m-%Y %H:%M:%S' -d @$talker_stop` ($talker_stop)
@@ -64,6 +70,8 @@ Last Radio Activity : `date +'%d-%m-%Y %H:%M:%S' -d @$last` ($last)
 Timer               : $timer seconds
 --------------------
 EOF
+
+    fi
 
     # And standby...
 

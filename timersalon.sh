@@ -80,4 +80,5 @@ done
 
 # Return to RRF
 
+echo 'Return to RRF at `date +'%d-%m-%Y %H:%M:%S' -d @$now` ($now)' > /var/log/timersalon.log
 /etc/spotnik/restart.rrf

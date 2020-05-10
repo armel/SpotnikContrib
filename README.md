@@ -1,3 +1,17 @@
+# Script shell `timersalon.sh`
+
+Ce script est une ré-écriture complète du script écrit initialement par F4GBV Isabelle. Par défaut, la durée du timeout est fixée à 300 secondes, soit 5 minutes. À noter que le décompte commence uniquement si aucune activité...
+
+Enfin, la durée du timeout peut-être passée en argument du script. Cette possibilité permet par exemple de fixer le timeout à 120 secondes, soit 2 minutes, sur le salon Local et à 240 secondes, soit 4 minutes, sur le salon Technique.
+
+Par exemple, en fin de script `restart.tec`, il suffit de mettre :
+
+`sh /etc/spotnik/timersalon.sh 240 &`au lieu de,
+
+`sh /etc/spotnik/timersalon.sh &`
+
+Pour finir, un fichier de log est écrit dans `/var/log/timersalon.log`. Il sert uniquement à des fins de débuggage. Le choix d'écrire dans `/var/log` permet d'éviter des écritures sur la carte SD (`/var/log` étant monté en mémoire). 
+
 # Script shell `num.sh`
 
 Ce script, totalement générique, dispose des options suivantes :

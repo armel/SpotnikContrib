@@ -8,7 +8,7 @@
 
 if [ $# -eq 0 ]
 then
-    timeout=300
+    timeout=360
 else
     timeout=$1
 fi

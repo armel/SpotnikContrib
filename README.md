@@ -14,7 +14,7 @@ au lieu de,
 
 > Attention, il n'est pas conseillé d'indiquer un timeout inférieur au timeout du salon.
 
-Pour finir, un fichier de log est écrit dans `/var/log/timersalon.log`. Il sert uniquement à des fins de débuggage. Le choix d'écrire dans `/var/log` permet d'éviter des écritures sur la carte SD (`/var/log` étant monté en mémoire). 
+Pour finir, un fichier de log est écrit dans `/tmp/timersalon.log`. Il sert uniquement à des fins de débuggage.
 
 # Script shell `num.sh`
 

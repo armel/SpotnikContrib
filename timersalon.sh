@@ -19,7 +19,7 @@ last=`date +%s`
 timer=0
 talker_start=0
 talker_stop=`date +%s`
-log='/var/log/timersalon.log' 
+log='/tmp/timersalon.log' 
 
 # Start log
 

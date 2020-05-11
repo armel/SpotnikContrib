@@ -2,11 +2,11 @@
 
 Ce script est une ré-écriture complète du script écrit initialement par F4GBV Isabelle. Par défaut, la durée du timeout est fixée à 300 secondes, soit 5 minutes. À noter que le décompte commence uniquement si aucune activité...
 
-Enfin, la durée du timeout peut-être passée en argument du script. Cette possibilité permet par exemple de fixer le timeout à 120 secondes, soit 2 minutes, sur le salon Local et à 240 secondes, soit 4 minutes, sur le salon Technique.
+Enfin, la durée du timeout peut-être passée en argument du script. Cette possibilité permet par exemple de fixer le timeout à 300 secondes, soit 5 minutes, sur le salon Local et à 600 secondes, soit 10 minutes, sur le salon Technique.
 
 Par exemple, en fin de script `restart.tec`, il suffit de mettre :
 
-`sh /etc/spotnik/timersalon.sh 240 &`
+`sh /etc/spotnik/timersalon.sh 600 &`
 
 au lieu de,
 

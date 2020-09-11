@@ -12,7 +12,7 @@ au lieu de,
 
 `sh /etc/spotnik/timersalon.sh &`
 
-> Attention, il n'est pas conseillé d'indiquer un timeout inférieur au timeout du salon.
+> ~~Attention, il n'est pas conseillé d'indiquer un timeout inférieur au timeout du salon.~~
 
 Pour finir, un fichier de log est écrit dans `/tmp/timersalon.log`. Il sert uniquement à des fins de débuggage.
 

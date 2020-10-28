@@ -14,7 +14,7 @@ Vous pouvez par exemple envisager de _parker_ votre link sur un salon annexe, pu
 
 Votre link restera là où il est et il ne sera plus possible de le déplacer ailleurs, à moins de renvoyer à nouveau la commande DTMF.
 
-Evidement, ce code DTMF devrait être connu du ou des Sysops en charge de la gestion de link et eux seuls uniquement ;)
+**Pour des raisons évidentes de part son caractère stratégique, ce code DTMF devrait être connu du Sysop en charge de la gestion du link et de lui seul ;)**
 
 Cette section de script TCL est évidement à ajouter à votre fichier `Logic.tcl`, qui se trouve dans le répertoire `/usr/share/svxlink/events.d/local`. 
 

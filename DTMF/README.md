@@ -10,7 +10,7 @@ Ce script TCL permet tout simplement de désactiver l'interpretation des command
 
 Ce script TCL peut s'avérer très utile pour les Sysops de link, par exemple, victime d'un perturbateur. 
 
-Vous pouvez par exemple envisager de _parker_ votre link sur un salon annexe, puis désactiver le timersalon (via le script TCL `timersalon.tcl`, puis désactiver les commandes DTMF.
+Vous pouvez par exemple envisager de _parker_ votre link sur un salon annexe, puis désactiver le timersalon (voir le script TCL `timersalon.tcl`), puis désactiver les commandes DTMF.
 
 Votre link restera là où il est et il ne sera plus possible de le déplacer ailleurs, à moins de renvoyer à nouveau la commande DTMF.
 

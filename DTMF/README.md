@@ -20,7 +20,7 @@ Cette section de script TCL est évidement à ajouter à votre fichier `Logic.tc
 
 **Attention !**
 
-**Cette section doit impérativement être placé AVANT les autres sections dédiées aux autres commandes DTMF de votre fichier `Logic.tcl`.**
+**Cette section doit impérativement être placé AVANT les autres sections dédiées au traitement des autres commandes DTMF de votre fichier `Logic.tcl`.**
 
 De mon coté, je l'ai placé juste avant la section suivante (ligne 596) :
 

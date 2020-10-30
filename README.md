@@ -42,7 +42,7 @@ Ces 2 options pointent tout simplement vers `/etc/spotnik/num.sh enable` et `/et
 
 # Scripts TCL de gestion des commandes DTMF
 
-Voir le `README.md` dans le répertoire DTMF.
+Voir le `README.md` dans le répertoire `DTMF` de ce _repository_.
 
 # Todo
 

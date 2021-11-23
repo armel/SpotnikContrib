@@ -3,15 +3,13 @@
     if { [file exists /tmp/TIMER] } {
       file delete -force /tmp/TIMER
       exec nohup /etc/spotnik/timersalon.sh &
-      exec /opt/RRFSpeech/RRFSpeech.sh " Taille meurt salon, activée"
-      playFile /tmp/out.wav
+      playFile /usr/share/svxlink/sounds/fr_FR/RRF/timer_on.wav
     } else {
       set outfile [open "/tmp/TIMER" w]
       puts $outfile "TIMER OFF"
       close $outfile
       exec /usr/bin/pkill -f timersalon
-      exec /opt/RRFSpeech/RRFSpeech.sh " Taille meurt salon, désactivée"
-      playFile /tmp/out.wav
+      playFile /usr/share/svxlink/sounds/fr_FR/RRF/timer_off.wav
     }
     return 1
   }

@@ -32,6 +32,10 @@ De mon coté, je l'ai placé juste avant la section suivante (ligne 596) :
   }
 ```
 
+# Fichiers vocaux
+
+Pour finir, penser à copier les 4 fichiers .wav qui se trouve dans le répertoire `sounds`. Vous devez les placer dans le répertoire `/usr/share/svxlink/sounds/fr_FR/RRF` (avec les autres fichiers déjà présents). 
+
 
 73 de F4HWN Armel
 

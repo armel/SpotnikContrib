@@ -28,22 +28,22 @@ print ('      ' + ser.portstr)       # check which port was really used
 key=1
 while key == 1:
     print ('------------------------------------------------------')
-    Spacing=raw_input('Enter Channel Spacing (0 or 1): ')
-    FreqTx=raw_input('Enter Tx Frequency (xxx.xxxx): ')
-    FreqRx=raw_input('Enter Rx Frequency (xxx.xxxx): ')
-    tx_ctcss=raw_input('Enter Tx ctcss Code Value (xxxx): ')
-    rx_ctcss=raw_input('Enter Rx ctcss Code Value (xxxx): ')
-    squelch=raw_input ('Enter Squelch Value (1-9): ')
-    Volume=raw_input('Enter Volume (0-8): ')
-    PreEmphasis=raw_input('Enable Pre/De-Emphasis (y/[n]): ')
+    Spacing=input('Enter Channel Spacing (0 or 1): ')
+    FreqTx=input('Enter Tx Frequency (xxx.xxxx): ')
+    FreqRx=input('Enter Rx Frequency (xxx.xxxx): ')
+    tx_ctcss=input('Enter Tx ctcss Code Value (xxxx): ')
+    rx_ctcss=input('Enter Rx ctcss Code Value (xxxx): ')
+    squelch=input('Enter Squelch Value (1-9): ')
+    Volume=input('Enter Volume (0-8): ')
+    PreEmphasis=input('Enable Pre/De-Emphasis (y/[n]): ')
     if PreEmphasis == "":
         PreEmphasis="n"
 
-    HighPass=raw_input('Enable High Pass Filter (y/[n]): ')
+    HighPass=input('Enable High Pass Filter (y/[n]): ')
     if HighPass == "":
         HighPass="n"
 
-    LowPass=raw_input('Enable Low Pass Filter (y/[n]): ')
+    LowPass=input('Enable Low Pass Filter (y/[n]): ')
     if LowPass == "":
         LowPass="n"
 
@@ -64,7 +64,7 @@ while key == 1:
 
     print ('------------------------------------------------------')
     Answer=""
-    Answer=raw_input(' Is this correct ([y]/n, or a to abort) ?')
+    Answer=input(' Is this correct ([y]/n, or a to abort) ?')
     if Answer == "":
           Answer = "y"
 

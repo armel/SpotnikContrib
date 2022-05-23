@@ -3,12 +3,9 @@
 #    
 #  SP2ONG 2019
 #  F4HWN 2020 (port from Python 2 to Python 3)
+#  F4HWD 2022 (fix bugs and optimize the code)
 #
 #  SVXBridge - link SVXLink  <> Analog_Bridge via USRP
-
-from time import time, sleep, clock, localtime, strftime
-from random import randint
-import shlex
 
 import socket
 import struct
@@ -21,11 +18,11 @@ import serial
 # USRP configuration Variables
 ipAddress = '127.0.0.1'
 
-# put number of txPort = 46001 from Ananlog_Bridge.ini
+# put number of txPort = 46001 from Analog_Bridge.ini
 # usrpPortRX = txPort
 usrpPortRX = 46001
 
-# put number of rxPort = 46002 from Ananlog_Bridge.ini
+# put number of rxPort = 46002 from Analog_Bridge.ini
 # usrpPortTX = rxPort
 usrpPortTX = 46002
 
@@ -45,7 +42,7 @@ s = serial.Serial('/tmp/PTT')
 
 # Status of /tmp/PTT:
 #  "T" - TX
-#  "R" - TX
+#  "R" - RX
 class ReadLine:
     def __init__(self, s):
         self.s = s
@@ -89,7 +86,7 @@ def rxAudioStream():
         soundData, addr = udp.recvfrom(1024)
         if addr[0] != ipAddress:
             ipAddress = addr[0]
-        if (soundData[0:4] == 'USRP'):
+        if (soundData[0:4] == b'USRP'):
             keyup, = struct.unpack('>i', soundData[12:16])
             if keyup == 0:
                 # SQL Close
@@ -144,13 +141,13 @@ def txAudioStream():
             else:
                 audio = stream.read(CHUNK, exception_on_overflow=False)
             if ptt != lastPtt:
-                usrp = 'USRP' + struct.pack('>iiiiiii',seq, 0, ptt, 0, 0, 0, 0)
+                usrp = b'USRP' + struct.pack('>iiiiiii',seq, 0, ptt, 0, 0, 0, 0)
                 udp.sendto(usrp, (ipAddress, usrpPortTX))
                 seq = seq + 1
                 #print 'PTT: {}'.format(ptt)
             lastPtt = ptt
             if ptt:
-                usrp = 'USRP' + struct.pack('>iiiiiii',seq, 0, ptt, 0, 0, 0, 0) + audio
+                usrp = b'USRP' + struct.pack('>iiiiiii',seq, 0, ptt, 0, 0, 0, 0) + audio
                 udp.sendto(usrp, (ipAddress, usrpPortTX))
                 #print 'transmitting'
                 seq = seq + 1
@@ -170,4 +167,3 @@ while True:
     p = (device.readline())
     if p == 'True' or p == 'False':
         ptt = not ptt
-

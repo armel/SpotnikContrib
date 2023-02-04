@@ -24,5 +24,6 @@ if ((n!=0)); then
         SEARCH=`grep -o 'echo "HOST=[^"]*' $TARGET | grep -o '[^"]*$'`
         REPLACE="HOST="$VALUE".f5nlg.ovh"
         sed -i.back "s/$SEARCH/$REPLACE/" $TARGET
+        touch $CHECK
     fi
 fi

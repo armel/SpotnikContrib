@@ -1,100 +1,124 @@
 #!/bin/sh
+
+# This script automatically moves the RRF node to the RRF room 
+# after a timeout (360s by default).
 #
-# Perform return to RRF after timeout  
+# Usage : ./timersalon.sh [--timeout=SECONDS] [--noise=SECONDS]
+#
 # F4HWN Armel
-#
+# Version 0.2
 
-# Set timeout in seconds
 
-if [ $# -eq 0 ]
-then
-    timeout=360
-else
-    timeout=$1
-fi
+# Set default timeout duration in seconds
+timeout=360
 
-# Init other values (don't touch)
+# Set default noise duration in seconds
+noise=3
 
-last=`date +%s`
+# Parse arguments
+while [ $# -gt 0 ]; do
+    case $1 in
+    --timeout=*)
+        timeout=${1#*=}
+        ;;
+    --noise=*)
+        noise=${1#*=}
+        ;;
+    *)
+        echo "Unknown argument: $1"
+        echo "Usage: $0 [--timeout=SECONDS] [--noise=SECONDS]"
+        exit 1
+        ;;
+    esac
+    shift
+done
+
+# Initialize other values (do not modify)
+last=$(date +%s)
 timer=0
-talker_start=0
-talker_stop=`date +%s`
-log='/tmp/timersalon.log' 
+talker_start=$(date +%s)
+talker_stop=$(date +%s)
+duration=0
+log='/tmp/timersalon.log'
 
 # Start log
-
-cat << EOF > $log
-Start QSY at        : `date +'%d-%m-%Y %H:%M:%S' -d @$last` ($last)
---------------------
-EOF
+{
+    echo "Start QSY at        : $(date +'%d-%m-%Y %H:%M:%S' -d @$last) ($last)"
+    echo "--------------------"
+} >"$log"
 
 # Main loop
-
-while [ $timer -lt $timeout ]; do
+while [ "$timer" -lt "$timeout" ]; do
     # Standby
     sleep 10
 
-    # Catch last Talker start (if exist)
-
-    tmp=`grep 'ReflectorLogic: Talker start:' /tmp/svxlink.log | tail -1 | cut -c1-24`
-    if [ ! -z "$tmp" ]
-    then
-        talker_start=`date -d "$tmp" +%s`
+    # Catch last Talker start (if exists)
+    tmp=$(grep 'ReflectorLogic: Talker start:' /tmp/svxlink.log | tail -1 | cut -c1-24)
+    if [ -n "$tmp" ]; then
+        talker_start=$(date -d "$tmp" +%s)
     fi
 
-    # Catch last Talker stop (if exist)
-
-    tmp=`grep 'ReflectorLogic: Talker stop:' /tmp/svxlink.log | tail -1 | cut -c1-24`
-    if [ ! -z "$tmp" ]
-    then
-        talker_stop=`date -d "$tmp" +%s`
+    # Catch last Talker stop (if exists)
+    tmp=$(grep 'ReflectorLogic: Talker stop:' /tmp/svxlink.log | tail -1 | cut -c1-24)
+    if [ -n "$tmp" ]; then
+        talker_stop=$(date -d "$tmp" +%s)
     fi
 
-    # If last Talker start > last Talker stop, then somebody is speaking so
-    #   last activity is now
-    # Else
-    #   last activity was at last Talker stop... 
+    now=$(date +%s)
 
-    if [ $talker_start -gt $talker_stop ]
-    then
-        last=`date +%s`
-        trace=false
+    trace=true
+
+    # Determine last activity
+    if [ "$talker_start" -gt "$talker_stop" ]; then
+        {
+            duration=$((now - talker_start))
+
+            if [ "$((now - talker_start))" -gt "$noise" ]; then
+                last=$now
+            fi
+        }
     else
-        last=$talker_stop
-        trace=true
+        {
+            if [ "$talker_stop" -gt "$talker_start" ]; then
+                {
+                    if [ "$((talker_stop - talker_start))" -gt "$noise" ]; then
+                        last=$talker_stop
+                    fi
+                }
+
+            fi
+            duration=$((talker_stop - talker_start))
+        }
     fi
 
-    now=`date +%s`
+    timer=$((now - last))
 
-    timer=$(($now-$last))
+    # Write trace for debugging (only if trace is true)
+    if [ "$trace" = true ]; then
+        {
+            duration_minutes=$((duration / 60))
+            duration_seconds=$((duration % 60))
 
-    # Write trace for debug, only if trace is true (nobody speaking...)
-
-    if [ "$trace" = true ]
-    then
-
-cat << EOF >> $log
-Last Talker Start   : `date +'%d-%m-%Y %H:%M:%S' -d @$talker_start` ($talker_start)
-Last Talker Stop    : `date +'%d-%m-%Y %H:%M:%S' -d @$talker_stop` ($talker_stop)
-Last Radio Activity : `date +'%d-%m-%Y %H:%M:%S' -d @$last` ($last)
-Timout              : $timeout seconds
-Timer               : $timer seconds
---------------------
-EOF
+            echo "Last Talker Start : $(date +'%d-%m-%Y %H:%M:%S' -d @$talker_start) ($talker_start)"
+            echo "Last Talker Stop  : $(date +'%d-%m-%Y %H:%M:%S' -d @$talker_stop) ($talker_stop)"
+            echo "Last Activity     : $(date +'%d-%m-%Y %H:%M:%S' -d @$last) ($last)"
+            echo "Last Duration     : $(printf '%02d:%02d' $duration_minutes $duration_seconds)"
+            echo "Timeout           : $(printf '%03d seconds' $timeout)"
+            echo "Noise             : $(printf '%03d seconds' $noise)"
+            echo "Timer             : $(printf '%03d seconds' $timer)"
+            echo "------------------"
+        } >>"$log"
     else
-
-cat << EOF > $log
-Last QSO active at  : `date +'%d-%m-%Y %H:%M:%S' -d @$now` ($now)
---------------------
-EOF
-
+        {
+            echo "Last QSO active at  : $(date +'%d-%m-%Y %H:%M:%S' -d @$now) ($now)"
+            echo "--------------------"
+        } >"$log"
     fi
 done
 
 # Return to RRF
-
-cat << EOF >> $log
-Return to RRF at    : `date +'%d-%m-%Y %H:%M:%S' -d @$now` ($now)
-EOF
+{
+    echo "Return to RRF at    : $(date +'%d-%m-%Y %H:%M:%S' -d @$now) ($now)"
+} >>"$log"
 
 /etc/spotnik/restart.rrf
